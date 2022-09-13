@@ -1,0 +1,23 @@
+{
+  "name": "oh-my-electron",
+  "version": "1.0.0",
+  "description": "一个electron程序的构建模板和示例",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GreedyWhale/oh-my-electron.git"
+  },
+  "keywords": [
+    "electron",
+    "template"
+  ],
+  "author": "caisr",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GreedyWhale/oh-my-electron/issues"
+  },
+  "homepage": "https://github.com/GreedyWhale/oh-my-electron#readme"
+}
