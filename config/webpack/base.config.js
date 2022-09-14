@@ -3,7 +3,7 @@
  * @Author: MADAO
  * @Date: 2022-09-13 16:50:19
  * @LastEditors: MADAO
- * @LastEditTime: 2022-09-14 15:25:40
+ * @LastEditTime: 2022-09-14 16:07:13
  */
 const webpack = require('webpack');
 const path = require('path');
@@ -83,6 +83,13 @@ const config =  {
       '/renderer/assets/fonts': path.join(rootPath, '/renderer/assets/fonts'),
     },
   },
+  externals: {
+    /**
+     * @see https://github.com/Level/leveldown/issues/725#issuecomment-645750649
+     */
+    'ffi-napi': 'commonjs ffi-napi',
+  },
+  watch: APP_ENV === 'development'
 };
 
 module.exports = {

@@ -15,7 +15,7 @@ const path = require('path');
 const base = require('./base.config');
 
 module.exports = merge(base.config, {
-  target: 'electron20-renderer',
+  target: 'electron20.1-renderer',
   entry: path.join(base.rootPath, '/renderer/App.tsx'),
   output: {
     path: path.join(base.rootPath, 'dist'),

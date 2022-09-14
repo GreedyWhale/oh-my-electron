@@ -13,7 +13,7 @@ const path = require('path');
 const base = require('./base.config');
 
 module.exports = merge(base.config, {
-  target: 'electron20-main',
+  target: 'electron20.1-main',
   entry: path.join(base.rootPath, '/main/index.ts'),
   output: {
     path: path.join(base.rootPath, 'dist/main'),
