@@ -3,20 +3,22 @@
  * @Author: MADAO
  * @Date: 2022-09-13 16:17:13
  * @LastEditors: MADAO
- * @LastEditTime: 2022-09-14 11:07:22
+ * @LastEditTime: 2022-09-14 12:49:28
  */
 import { app, BrowserWindow } from 'electron';
 import { join } from 'path';
 
-import { getPathFromRoot } from '~/lib/system';
-
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
-    height: 600
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false // 可以在控制台和renderer进程中使用 Node 相关 API
+    }
   })
 
-  // win.loadFile(getPathFromRoot('/dist/index.html'))
+  win.loadFile(join(app.getAppPath(), '/dist/index.html'))
 }
 
 app.on('window-all-closed', () => {

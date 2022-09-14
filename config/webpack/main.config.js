@@ -3,7 +3,7 @@
  * @Author: MADAO
  * @Date: 2022-09-13 16:03:27
  * @LastEditors: MADAO
- * @LastEditTime: 2022-09-14 11:16:29
+ * @LastEditTime: 2022-09-14 12:36:07
  */
 const { merge } = require('webpack-merge');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -17,12 +17,11 @@ module.exports = merge(base.config, {
   entry: path.join(base.rootPath, '/main/index.ts'),
   output: {
     path: path.join(base.rootPath, 'dist/main'),
-    filename: 'main.js',
+    filename: 'index.js',
   },
   plugins: [
     new CleanWebpackPlugin({
       verbose: true,
-      cleanOnceBeforeBuildPatterns: ['main/**/*'],
     }),
   ],
   watchOptions: {
