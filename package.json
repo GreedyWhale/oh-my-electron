@@ -4,11 +4,14 @@
   "description": "一个electron程序的构建模板",
   "main": "dist/main/index.js",
   "scripts": {
-    "test:types": "echo \"Error: no test specified\" && exit 1",
+    "test:types": "tsc --noEmit",
+    "encrypt": "node ./config/codeEncryption.js",
     "build:main": "webpack --config ./config/webpack/main.config.js",
     "build:renderer": "webpack --config ./config/webpack/renderer.config.js",
     "build:preload": "webpack --config ./config/webpack/preload.config.js",
-    "dev": "cross-env APP_ENV=production run-s build:main build:preload build:renderer"
+    "dev": "cross-env APP_ENV=development run-p build:main build:preload build:renderer",
+    "build": "cross-env APP_ENV=production run-s test:types build:main build:preload build:renderer",
+    "build:encrypt": "cross-env APP_ENV=production APP_ENCRYPT=true run-s test:types build:main build:preload build:renderer"
   },
   "repository": {
     "type": "git",
@@ -46,6 +49,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "electron": "^20.1.3",
+    "fs-extra": "^10.1.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.1",
     "npm-run-all": "^4.1.5",
@@ -58,6 +62,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "bytenode": "^1.3.6",
     "ffi-napi": "^4.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

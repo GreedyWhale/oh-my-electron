@@ -3,7 +3,7 @@
  * @Author: MADAO
  * @Date: 2022-09-13 16:03:27
  * @LastEditors: MADAO
- * @LastEditTime: 2022-09-14 14:35:55
+ * @LastEditTime: 2022-09-14 16:32:42
  */
 const { merge } = require('webpack-merge');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -16,7 +16,9 @@ const base = require('./base.config');
 
 module.exports = merge(base.config, {
   target: 'electron20.1-renderer',
-  entry: path.join(base.rootPath, '/renderer/App.tsx'),
+  entry: {
+    app: path.join(base.rootPath, '/renderer/App.tsx')
+  },
   output: {
     path: path.join(base.rootPath, 'dist'),
     filename: 'renderer/[name]_[contenthash].js',
