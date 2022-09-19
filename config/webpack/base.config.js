@@ -3,7 +3,7 @@
  * @Author: MADAO
  * @Date: 2022-09-13 16:50:19
  * @LastEditors: MADAO
- * @LastEditTime: 2022-09-14 16:07:13
+ * @LastEditTime: 2022-09-19 23:11:36
  */
 const webpack = require('webpack');
 const path = require('path');
@@ -16,7 +16,9 @@ const config =  {
   mode: APP_ENV,
   devtool: APP_ENV === 'production' ? false : 'eval-cheap-module-source-map',
   plugins: [
-    new webpack.EnvironmentPlugin(['APP_ENV']),
+    new webpack.EnvironmentPlugin({
+      'process.env.APP_ENV': APP_ENV,
+    }),
   ],
   module: {
     rules: [
@@ -88,6 +90,11 @@ const config =  {
      * @see https://github.com/Level/leveldown/issues/725#issuecomment-645750649
      */
     'ffi-napi': 'commonjs ffi-napi',
+    /**
+     * @see https://github.com/yan-foto/electron-reload/issues/71#issuecomment-588988382
+     * @description: 用于解决 fsevents.node  报的 Module parse failed: Unexpected character '�'错误，报错原因应该是chalk包和webpack打包的问题
+     */
+    fsevents: 'require("fsevents")',
   },
   watch: APP_ENV === 'development'
 };

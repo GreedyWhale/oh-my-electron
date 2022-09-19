@@ -3,7 +3,7 @@
  * @Author: MADAO
  * @Date: 2022-09-19 20:59:39
  * @LastEditors: MADAO
- * @LastEditTime: 2022-09-19 22:27:57
+ * @LastEditTime: 2022-09-19 23:15:40
  */
 const chokidar = require('chokidar');
 const path = require('path');
@@ -27,7 +27,7 @@ const launchApplication = () => {
 };
 
 const mainProcessWatcher = () => new Promise(resolve => {
-  chokidar.watch(path.join(watchDir, './main/index.js'), { awaitWriteFinish: true, })
+  chokidar.watch(path.join(watchDir, './main/main.js'), { awaitWriteFinish: true, })
     .on('change', () => {
       console.log(chalk.green('✨主进程文件打包完毕!'));
       resolve(true);
@@ -35,7 +35,7 @@ const mainProcessWatcher = () => new Promise(resolve => {
 });
 
 const preloadProcessWatcher = () => new Promise(resolve => {
-  chokidar.watch(path.join(watchDir, './preload/index.js'), { awaitWriteFinish: true, })
+  chokidar.watch(path.join(watchDir, './preload/preload.js'), { awaitWriteFinish: true, })
     .on('change', () => {
       console.log(chalk.green('✨预加载文件打包完毕!'));
       resolve(true);

@@ -3,10 +3,17 @@
  * @Author: MADAO
  * @Date: 2022-09-13 16:17:13
  * @LastEditors: MADAO
- * @LastEditTime: 2022-09-19 11:53:16
+ * @LastEditTime: 2022-09-19 23:21:26
  */
 import { app, BrowserWindow } from 'electron';
 import { join } from 'path';
+
+import hotReload from '~/lib/hotReload';
+import { enableReload } from '~/lib/env';
+
+if (enableReload) {
+  hotReload();
+}
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -19,7 +26,7 @@ const createWindow = () => {
        * 由于bytenode 原因在renderer进程必须可以使用 Node 相关 API，所以需要false, 这会带来安全性问题
        */
       contextIsolation: process.env.APP_ENCRYPT === 'true' ? false : true,
-      preload: join(__dirname, '../preload/index.js')
+      preload: join(__dirname, '../preload/preload.js')
     }
   })
 

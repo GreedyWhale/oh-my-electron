@@ -3,7 +3,7 @@
  * @Author: MADAO
  * @Date: 2022-09-13 16:03:27
  * @LastEditors: MADAO
- * @LastEditTime: 2022-09-13 16:03:58
+ * @LastEditTime: 2022-09-19 23:14:42
  */
 const { merge } = require('webpack-merge');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -17,7 +17,7 @@ module.exports = merge(base.config, {
   entry: path.join(base.rootPath, '/preload/index.ts'),
   output: {
     path: path.join(base.rootPath, 'dist/preload'),
-    filename: 'index.js',
+    filename: 'preload.js',
   },
   plugins: [
     new CleanWebpackPlugin({

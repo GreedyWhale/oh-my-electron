@@ -2,7 +2,7 @@
   "name": "oh-my-electron",
   "version": "1.0.0",
   "description": "一个electron程序的构建模板",
-  "main": "dist/main/index.js",
+  "main": "dist/main/main.js",
   "scripts": {
     "test:types": "tsc --noEmit",
     "encrypt": "node ./config/codeEncryption.js",
@@ -10,7 +10,7 @@
     "build:main": "webpack --config ./config/webpack/main.config.js",
     "build:renderer": "webpack --config ./config/webpack/renderer.config.js",
     "build:preload": "webpack --config ./config/webpack/preload.config.js",
-    "dev": "cross-env APP_ENV=development run-p watch build:main build:preload build:renderer",
+    "dev": "cross-env APP_ENV=development APP_RELOAD=true run-p watch build:main build:preload build:renderer",
     "build": "cross-env APP_ENV=production run-s test:types build:main build:preload build:renderer",
     "build:encrypt": "cross-env APP_ENV=production APP_ENCRYPT=true run-s test:types build:main build:preload build:renderer"
   },
