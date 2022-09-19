@@ -6,10 +6,11 @@
   "scripts": {
     "test:types": "tsc --noEmit",
     "encrypt": "node ./config/codeEncryption.js",
+    "watch": "node ./config/afterBuild.js",
     "build:main": "webpack --config ./config/webpack/main.config.js",
     "build:renderer": "webpack --config ./config/webpack/renderer.config.js",
     "build:preload": "webpack --config ./config/webpack/preload.config.js",
-    "dev": "cross-env APP_ENV=development run-p build:main build:preload build:renderer",
+    "dev": "cross-env APP_ENV=development run-p watch build:main build:preload build:renderer",
     "build": "cross-env APP_ENV=production run-s test:types build:main build:preload build:renderer",
     "build:encrypt": "cross-env APP_ENV=production APP_ENCRYPT=true run-s test:types build:main build:preload build:renderer"
   },
@@ -43,6 +44,8 @@
     "@types/react": "^18.0.20",
     "@types/react-dom": "^18.0.6",
     "babel-loader": "^8.2.5",
+    "chalk": "^5.0.1",
+    "chokidar": "^3.5.3",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "core-js": "^3.25.1",
