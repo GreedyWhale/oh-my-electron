@@ -3,7 +3,7 @@
  * @Author: MADAO
  * @Date: 2022-09-13 16:17:13
  * @LastEditors: MADAO
- * @LastEditTime: 2022-09-24 14:27:19
+ * @LastEditTime: 2022-09-24 15:45:52
  */
 import { app, BrowserWindow } from 'electron';
 import { join } from 'path';
@@ -51,3 +51,5 @@ app.whenReady().then(
   },
   error => { console.error(error); },
 );
+
+console.log(1);

@@ -3,13 +3,13 @@
  * @Author: MADAO
  * @Date: 2022-09-13 16:50:19
  * @LastEditors: MADAO
- * @LastEditTime: 2022-09-24 14:25:08
+ * @LastEditTime: 2022-09-24 14:39:26
  */
 const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const { APP_ENV = 'production', APP_ENCRYPT } = process.env;
+const { APP_ENV = 'production', APP_ENCRYPT = 'false' } = process.env;
 const rootPath = path.join(__dirname, '../../');
 const srcPath = path.join(rootPath, 'src');
 

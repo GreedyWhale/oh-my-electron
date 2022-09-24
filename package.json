@@ -5,8 +5,8 @@
   "main": "dist/main/main.js",
   "scripts": {
     "check:types": "tsc --noEmit",
-    "encrypt": "node ./config/codeEncryption.js",
-    "watch": "node ./config/afterBuild.js",
+    "encrypt": "node ./bin/codeEncryption.js",
+    "watch": "node ./bin/afterBuild.js",
     "build:main": "webpack --config ./config/webpack/main.config.js",
     "build:renderer": "webpack --config ./config/webpack/renderer.config.js",
     "build:preload": "webpack --config ./config/webpack/preload.config.js",

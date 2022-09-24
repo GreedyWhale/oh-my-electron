@@ -3,16 +3,18 @@
  * @Author: MADAO
  * @Date: 2022-09-19 20:59:39
  * @LastEditors: MADAO
- * @LastEditTime: 2022-09-24 12:29:22
+ * @LastEditTime: 2022-09-24 15:51:13
  */
 const chokidar = require('chokidar');
 const path = require('path');
 const { spawn } = require('child_process');
+const { existsSync } = require('fs');
 
 const watchDir = path.join(__dirname, '../dist');
 let launched = false;
 let rendererWatchTimer = -1;
 let chalk;
+const eventName = existsSync(watchDir) ? 'change' : 'add';
 
 const launchApplication = () => {
   if (launched) {
@@ -28,7 +30,7 @@ const launchApplication = () => {
 
 const mainProcessWatcher = () => new Promise(resolve => {
   const watcher = chokidar.watch(path.join(watchDir, './main/main.js'), { awaitWriteFinish: true });
-  watcher.on('add', () => {
+  watcher.on(eventName, () => {
     console.log(chalk.green('✨主进程文件打包完毕!'));
     resolve(watcher);
   });
@@ -36,7 +38,7 @@ const mainProcessWatcher = () => new Promise(resolve => {
 
 const preloadProcessWatcher = () => new Promise(resolve => {
   const watcher = chokidar.watch(path.join(watchDir, './preload/preload.js'), { awaitWriteFinish: true });
-  watcher.on('add', () => {
+  watcher.on(eventName, () => {
     console.log(chalk.green('✨预加载文件打包完毕!'));
     resolve(watcher);
   });
@@ -44,7 +46,7 @@ const preloadProcessWatcher = () => new Promise(resolve => {
 
 const rendererProcessWatcher = () => new Promise(resolve => {
   const watcher = chokidar.watch(path.join(watchDir, './renderer/app.js'), { awaitWriteFinish: true });
-  watcher.on('add', () => {
+  watcher.on(eventName, () => {
     clearTimeout(rendererWatchTimer);
     rendererWatchTimer = setTimeout(() => {
       console.log(chalk.green('✨渲染进程文件打包完毕!'));

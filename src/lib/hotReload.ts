@@ -3,7 +3,7 @@
  * @Author: MADAO
  * @Date: 2022-09-19 22:30:32
  * @LastEditors: MADAO
- * @LastEditTime: 2022-09-24 13:29:47
+ * @LastEditTime: 2022-09-24 15:58:59
  */
 import { join } from 'path';
 
@@ -12,6 +12,7 @@ import { app, BrowserWindow } from 'electron';
 
 let relaunchTimer: NodeJS.Timer;
 let reloadTimer: NodeJS.Timer;
+const threshold = 50;
 
 const relaunch = () => {
   clearTimeout(relaunchTimer);
@@ -19,7 +20,7 @@ const relaunch = () => {
     console.log('重启应用');
     app.relaunch({ args: process.argv.slice(1).concat(['--relaunch']) });
     app.exit(0);
-  }, 300);
+  }, threshold);
 };
 
 const reload = () => {
@@ -30,7 +31,7 @@ const reload = () => {
     windows.forEach(item => {
       item.webContents.reloadIgnoringCache();
     });
-  }, 300);
+  }, threshold);
 };
 
 const watcher = () => {
