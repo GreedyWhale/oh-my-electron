@@ -3,30 +3,26 @@
  * @Author: MADAO
  * @Date: 2022-09-14 16:24:55
  * @LastEditors: MADAO
- * @LastEditTime: 2022-09-15 00:01:37
+ * @LastEditTime: 2022-09-24 14:26:35
  */
 const bytenode = require('bytenode');
 const fse = require('fs-extra');
 const path = require('path');
 
-const fillFile = (file) => fse.writeFile(file.target, `
+const fillFile = file => fse.writeFile(file.target, `
   if (require) {
     const path = require('path');
     const bytenode = require('bytenode');
     require(path.join(__dirname, '${file.publicPath}', '${path.basename(file.target).replace('.js', '.jsc')}'));
   }
-`)
+`);
 
 const main = async () => {
-  const rendererProcessPath = path.join(__dirname, '../dist/renderer');
-  const rendererProcess = fse.readdirSync(rendererProcessPath)
-    .filter(value => value.endsWith('.js'))
-    .map(value => ({ target: `${rendererProcessPath}/${value}`, publicPath: './renderer' }))
   const files = [
-    { target: path.join(__dirname, '../dist/main/index.js'), publicPath: './' },
-    { target: path.join(__dirname, '../dist/preload/index.js'), publicPath: './' },
-    ...rendererProcess,
-  ]
+    { target: path.join(__dirname, '../dist/main/main.js'), publicPath: './' },
+    { target: path.join(__dirname, '../dist/preload/preload.js'), publicPath: './' },
+    { target: path.join(__dirname, '../dist/renderer/app.js'), publicPath: './renderer' },
+  ];
 
   const compileTasks = files.map(file => Promise.all([
     bytenode.compileFile({
@@ -37,7 +33,7 @@ const main = async () => {
     fillFile(file),
   ]));
 
-  await Promise.all(compileTasks).then(() => { console.log('done!'); })
-}
+  await Promise.all(compileTasks).then(() => { console.log('done!'); });
+};
 
 main();

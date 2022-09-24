@@ -3,7 +3,7 @@
  * @Author: MADAO
  * @Date: 2022-09-24 10:17:23
  * @LastEditors: MADAO
- * @LastEditTime: 2022-09-24 10:20:44
+ * @LastEditTime: 2022-09-24 14:30:54
  */
 module.exports = {
   env: {
@@ -25,10 +25,27 @@ module.exports = {
         '*.tsx',
       ],
     },
+    {
+      files: ['*.ts', '*.tsx', '*.js'],
+      rules: {
+        indent: 'off', // https://github.com/eslint/eslint/issues/13956#issuecomment-751236261
+        '@typescript-eslint/indent': ['error', 2],
+        'object-curly-spacing': 'off',
+        '@typescript-eslint/object-curly-spacing': ['error', 'always'],
+        'no-duplicate-imports': ['error'],
+        '@next/next/no-img-element': 'off',
+        camelcase: 'off',
+        'max-statements-per-line': ['error', { max: 2 }],
+        'brace-style': ['error', '1tbs', { allowSingleLine: true }],
+        '@typescript-eslint/brace-style': ['error', '1tbs', { allowSingleLine: true }],
+        '@typescript-eslint/no-floating-promises': 'off',
+      },
+    },
   ],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
+    project: './tsconfig.json',
   },
   plugins: [
     'react',
@@ -37,13 +54,5 @@ module.exports = {
   rules: {
     'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
     'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
-    indent: 'off', // https://github.com/eslint/eslint/issues/13956#issuecomment-751236261
-    '@typescript-eslint/indent': ['error', 2],
-    'object-curly-spacing': ['error', 'always'],
-    'no-duplicate-imports': ['error'],
-    '@next/next/no-img-element': 'off',
-    camelcase: 'off',
-    'max-statements-per-line': ['error', { max: 2 }],
-    'brace-style': ['error', '1tbs', { allowSingleLine: true }],
   },
 };

@@ -3,10 +3,10 @@
  * @Author: MADAO
  * @Date: 2022-09-14 14:59:30
  * @LastEditors: MADAO
- * @LastEditTime: 2022-09-14 15:18:42
+ * @LastEditTime: 2022-09-24 11:13:18
  */
 declare module '*.scss' {
-  const classes: { readonly [key: string]: string };
+  const classes: Readonly<Record<string, string>>;
   export default classes;
 }
 
@@ -21,7 +21,7 @@ declare module '*.svg' {
 }
 
 declare module '*?raw' {
-  const raw: any;
+  const raw: string;
   export default raw;
 }
 

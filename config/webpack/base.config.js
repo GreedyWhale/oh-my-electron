@@ -3,21 +3,29 @@
  * @Author: MADAO
  * @Date: 2022-09-13 16:50:19
  * @LastEditors: MADAO
- * @LastEditTime: 2022-09-19 23:11:36
+ * @LastEditTime: 2022-09-24 14:25:08
  */
 const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const { APP_ENV = 'production' } = process.env;
+const { APP_ENV = 'production', APP_ENCRYPT } = process.env;
 const rootPath = path.join(__dirname, '../../');
+const srcPath = path.join(rootPath, 'src');
 
-const config =  {
+const config = {
   mode: APP_ENV,
   devtool: APP_ENV === 'production' ? false : 'eval-cheap-module-source-map',
+  output: {
+    filename: '[name].js',
+    environment: {
+      arrowFunction: !APP_ENCRYPT === 'true',
+    },
+  },
   plugins: [
     new webpack.EnvironmentPlugin({
       'process.env.APP_ENV': APP_ENV,
+      'process.env.APP_ENCRYPT': APP_ENCRYPT,
     }),
   ],
   module: {
@@ -45,7 +53,7 @@ const config =  {
               implementation: require('sass'),
             },
           },
-        ]
+        ],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif|svg)$/i,
@@ -75,14 +83,14 @@ const config =  {
           filename: 'renderer/videos/[contenthash].[ext]',
         },
       },
-    ]
+    ],
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
-      '~': rootPath,
-      '/renderer/assets/images': path.join(rootPath, '/renderer/assets/images'),
-      '/renderer/assets/fonts': path.join(rootPath, '/renderer/assets/fonts'),
+      '~': srcPath,
+      '/renderer/assets/images': path.join(srcPath, '/renderer/assets/images'),
+      '/renderer/assets/fonts': path.join(srcPath, '/renderer/assets/fonts'),
     },
   },
   externals: {
@@ -96,10 +104,29 @@ const config =  {
      */
     fsevents: 'require("fsevents")',
   },
-  watch: APP_ENV === 'development'
+  watch: APP_ENV === 'development',
+  watchOptions: {
+    ignored: [
+      '!**/src',
+    ],
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          reuseExistingChunk: true,
+          enforce: true,
+          chunks: 'all',
+          name: 'vendors',
+        },
+      },
+    },
+  },
 };
 
 module.exports = {
   config,
   rootPath,
-}
+  srcPath,
+};

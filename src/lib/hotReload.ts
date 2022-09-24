@@ -3,13 +3,12 @@
  * @Author: MADAO
  * @Date: 2022-09-19 22:30:32
  * @LastEditors: MADAO
- * @LastEditTime: 2022-09-19 23:19:54
+ * @LastEditTime: 2022-09-24 13:29:47
  */
 import { join } from 'path';
 
 import chokidar from 'chokidar';
 import { app, BrowserWindow } from 'electron';
-
 
 let relaunchTimer: NodeJS.Timer;
 let reloadTimer: NodeJS.Timer;
@@ -28,14 +27,16 @@ const reload = () => {
   reloadTimer = setTimeout(() => {
     console.log('重新加载窗口');
     const windows = BrowserWindow.getAllWindows();
-    windows.forEach(item => item.webContents.reloadIgnoringCache());
+    windows.forEach(item => {
+      item.webContents.reloadIgnoringCache();
+    });
   }, 300);
-}
+};
 
 const watcher = () => {
-  chokidar.watch(join(app.getAppPath(), '/dist'), {
-    ignored: [/node_modules/, 'hotReload'],
+  chokidar.watch(join(app.getAppPath(), '/dist/**/*.*'), {
     alwaysStat: true,
+    awaitWriteFinish: true,
   }).on('change', (path, stats) => {
     if (stats) {
       if (path.includes('main.js')) {
