@@ -21,6 +21,20 @@
 
 # 快速上手
 
+## 命令说明
+
+```
+check:types - 检查类型
+encrypt - 加密源码
+watch - 监听首次文件构建完成后启动electron
+build:main - 打包main进程代码
+build:renderer - 打包renderer进程代码
+build:preload - 打包preload脚本代码
+dev - 启动开发环境服务，会监听文件变化，然后热重载应用
+build - 打包代码
+build:encrypt - 以加密的方式打包代码
+```
+
 ## 目录说明
 
 ```
