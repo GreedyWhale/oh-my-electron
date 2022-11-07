@@ -3,7 +3,7 @@
  * @Author: MADAO
  * @Date: 2022-09-13 16:50:19
  * @LastEditors: MADAO
- * @LastEditTime: 2022-09-24 14:39:26
+ * @LastEditTime: 2022-11-07 16:14:09
  */
 const webpack = require('webpack');
 const path = require('path');
@@ -24,8 +24,8 @@ const config = {
   },
   plugins: [
     new webpack.EnvironmentPlugin({
-      'process.env.APP_ENV': APP_ENV,
-      'process.env.APP_ENCRYPT': APP_ENCRYPT,
+      APP_ENV,
+      APP_ENCRYPT,
     }),
   ],
   module: {
